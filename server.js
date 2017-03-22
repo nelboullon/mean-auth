@@ -19,9 +19,11 @@ app.use(express.static('dist'));
 
 //TODO: Get routes
 //const api = require('./server/api');
+const users = require('./server/routes/users');
 
 //TODO: Set api routes
-//api.use('/api', api);
+//app.use('/api', api);
+app.use('/users', users);
 
 //Get port from enviroment and store in express
 const port = process.env.PORT || 5000;
