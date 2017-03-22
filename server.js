@@ -20,10 +20,12 @@ app.use(express.static('dist'));
 //TODO: Get routes
 //const api = require('./server/api');
 const users = require('./server/routes/api/users');
+const auth = require('./server/routes/api/authenticate');
 
 //TODO: Set api routes
 //app.use('/api', api);
 app.use('/api/users', users);
+app.use('/api/authenticate', auth);
 
 //Get port from enviroment and store in express
 const port = process.env.PORT || 5000;
