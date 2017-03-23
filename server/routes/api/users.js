@@ -2,20 +2,30 @@ const express = require('express');
 const router = express.Router();
 const User = require('../../models/user');
 
+const authentication = require('../../config/authentication');
+
 
 //HTTP requests
 
 //POST request
 router.post('/', (req, res) => {
-    var newUser = new User( {
-        email : req.body.email,
-        password : req.body.password
-    });
 
-    newUser.save((err) => {
-        if(err) throw err;
-        res.json({ user: 'Created!' });
-    });
+    var reqStatus = authentication(req)
+
+    if (reqStatus = true) {
+
+        var newUser = new User( {
+            email : req.body.email,
+            password : req.body.password
+        });
+
+        newUser.save((err) => {
+            if(err) throw err;
+            res.json({ user: 'Created!' });
+        });
+    } else {
+        res.json(reqStatus);
+    }
 
 });
 
