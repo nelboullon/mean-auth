@@ -9,7 +9,7 @@ router.use(authentication);
 //HTTP requests
 
 //POST request
-router.post('/', (req, res) => {
+router.post('/', (req, res, authentication) => {
 
         var newUser = new User( {
             email : req.body.email,
