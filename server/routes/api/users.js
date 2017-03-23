@@ -4,16 +4,14 @@ const User = require('../../models/user');
 
 const authentication = require('../../config/authentication');
 
+router.use(authentication);
 
 //HTTP requests
 
 //POST request
 router.post('/', (req, res) => {
 
-    var reqStatus = authentication(req)
-
-    if (reqStatus = true) {
-
+    
         var newUser = new User( {
             email : req.body.email,
             password : req.body.password
@@ -23,18 +21,23 @@ router.post('/', (req, res) => {
             if(err) throw err;
             res.json({ user: 'Created!' });
         });
-    } else {
-        res.json(reqStatus);
-    }
+    
 
 });
 
 //GET request
-router.get('/', (req,res) => {
-    User.find({}, (err, users) => {
-        if (err) throw err;
-        res.json(users);
-    });
+router.get('/', (req, res, authentication) => {
+
+    if (authentication = true) {
+
+        User.find({}, (err, users) => {
+            if (err) throw err;
+            res.json(users);
+        });
+
+    } else {
+        res.json(authentication);
+    }
 });
 
 
