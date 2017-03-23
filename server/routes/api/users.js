@@ -11,7 +11,6 @@ router.use(authentication);
 //POST request
 router.post('/', (req, res) => {
 
-    
         var newUser = new User( {
             email : req.body.email,
             password : req.body.password
@@ -22,22 +21,15 @@ router.post('/', (req, res) => {
             res.json({ user: 'Created!' });
         });
     
-
 });
 
 //GET request
 router.get('/', (req, res, authentication) => {
 
-    if (authentication = true) {
-
         User.find({}, (err, users) => {
             if (err) throw err;
             res.json(users);
         });
-
-    } else {
-        res.json(authentication);
-    }
 });
 
 
