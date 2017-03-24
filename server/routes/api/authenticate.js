@@ -10,6 +10,8 @@ const secrets = require('../../config/secrets');
 //POST requests
 router.post('/', (req, res) => {
 
+    console.log(req.body);
+
     //Find the user
     User.findOne({
 
@@ -34,11 +36,9 @@ router.post('/', (req, res) => {
             });
 
             //Return the information including token as JSON 
-            res.json({
-                success: true,
-                message: 'Enjoy your token!',
-                token: token 
-            });
+            res.status(200).send({
+            token: token
+        });
 
         }
 
