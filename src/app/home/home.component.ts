@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, Resolve, ActivatedRoute, Params } from '@angular/router';
 
-import { User } from '../user';
-import { UserService } from '../user.service';
+import { AuthenticationService } from '../authentication.service';
+import { SalesforceService } from '../salesforce.service';
 
 @Component({
   moduleId: module.id,
@@ -12,17 +13,28 @@ import { UserService } from '../user.service';
 
 export class HomeComponent implements OnInit {
 
-  users: User[] = [];
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private authenticationService: AuthenticationService,
+    private salesforceService: SalesforceService) { }
 
-  constructor(private UserService: UserService) { }
+  ngOnInit(){
+        
+    this.authenticationService.logout();
 
-  ngOnInit() {
+    if (this.activatedRoute.snapshot.queryParams['code']) {
 
-    //get users from secure api end point
-    this.UserService.getUsers()
-        .subscribe(users => {
-          this.users = users;
-        });
-  }
+      let sfCode = this.activatedRoute.snapshot.queryParams['code'];
+      let sfURL = 'https://login.salesforce.com/services/oauth2/token?code='+sfCode+'&grant_type=authorization_code&client_id=3MVG9i1HRpGLXp.p_zzAqY14i73050t21TX8NbRVI3Ks0GY4wfBX459fKOxzTZPx3isWUN_pSUxyxxkNs67wR&client_secret=3751390069198698753&redirect_uri=http://localhost:4200/dashboard';
+  
+      this.salesforceService.loginSF(sfURL)
+        .subscribe(result => {
 
+          console.log(result);
+
+        }); 
+    }
+
+    };
 }

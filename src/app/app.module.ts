@@ -11,7 +11,8 @@ import { routing } from './app.routing';
 
 import { AuthGuard } from './auth.guard';
 import { AuthenticationService } from './authentication.service';
-import { UserService } from './user.service';
+import { UserService } from './user.service'
+import { SalesforceService } from './salesforce.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { UserService } from './user.service';
   providers: [
     AuthGuard,
     AuthenticationService,
-    UserService
+    UserService,
+    SalesforceService
   ],
   bootstrap: [AppComponent]
 })
