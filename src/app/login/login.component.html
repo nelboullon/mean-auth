@@ -23,5 +23,6 @@
     </div>
     <div *ngIf="error" class="alert alert-danger">{{error}}</div>
   </form>
-  <button [disabled]="loading" class="btn btn-primary" (click)="loginSF()">Login with SalesForce</button>
+  <button [disabled]="loading" class="btn btn-primary" (click)="signInGoogle()">Login with Google</button>
+  <button [disabled]="loading" class="btn btn-primary" (click)="signInSalesforce()">Login with Salesforce</button>
 </div>

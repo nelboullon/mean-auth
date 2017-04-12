@@ -2,12 +2,14 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
+import { OauthComponent } from './oauth/oauth.component';
+
 import { AuthGuard } from './auth.guard';
 
 const appRoutes: Routes = [
 
     { path: 'login', component: LoginComponent },
-    { path: 'dashboard', component: HomeComponent },
+    { path: 'oauth2callback', component: OauthComponent },
     { path: '', component: HomeComponent, canActivate: [AuthGuard] },
 
     //otherwise redirect to home

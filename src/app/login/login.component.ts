@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, Resolve, ActivatedRoute, Params } from '@angular/router';
 
 import { AuthenticationService } from '../authentication.service';
+import { GoogleService } from '../google.service';
 import { SalesforceService } from '../salesforce.service';
 
 @Component({
@@ -14,18 +15,19 @@ export class LoginComponent implements OnInit {
   model: any = {};
   loading = false;
   error = '';
-  salesForceUrl = 'https://login.salesforce.com/services/oauth2/authorize?response_type=code&client_id=3MVG9i1HRpGLXp.p_zzAqY14i73050t21TX8NbRVI3Ks0GY4wfBX459fKOxzTZPx3isWUN_pSUxyxxkNs67wR&redirect_uri=http://localhost:4200/dashboard'
   
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService,
     private activatedRoute: ActivatedRoute,
-    private salesforceService: SalesforceService
+    private googleService: GoogleService,
+    private salesforceService: SalesforceService,
     ) { }
 
   ngOnInit() {
     
     //reset login status
+    this.authenticationService.logout();
         
   }
 
@@ -48,11 +50,15 @@ export class LoginComponent implements OnInit {
     
   }
 
-  loginSF() {
+  signInGoogle() {
 
-    console.log('Clicked!');
-    this.loading = true;
-    window.location.href = this.salesForceUrl; 
+    this.googleService.signin();
+
   }
 
+  signInSalesforce() {
+
+    this.salesforceService.signin();
+
+  }
 }
