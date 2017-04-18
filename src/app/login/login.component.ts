@@ -4,6 +4,7 @@ import { Router, Resolve, ActivatedRoute, Params } from '@angular/router';
 import { AuthenticationService } from '../authentication.service';
 import { GoogleService } from '../google.service';
 import { SalesforceService } from '../salesforce.service';
+import { SfService } from '../sf.service';
 
 @Component({
   moduleId: module.id,
@@ -22,6 +23,7 @@ export class LoginComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private googleService: GoogleService,
     private salesforceService: SalesforceService,
+    private sfService: SfService
     ) { }
 
   ngOnInit() {
@@ -58,7 +60,7 @@ export class LoginComponent implements OnInit {
 
   signInSalesforce() {
 
-    this.salesforceService.signin();
+    this.sfService.signin();
 
   }
 }

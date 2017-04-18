@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Http, Response } from '@angular/http';
+import { Http, Response, Headers, URLSearchParams } from '@angular/http';
 import { Router } from '@angular/router'
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
@@ -49,7 +49,7 @@ export class SalesforceService {
     form.submit();
   }
 
-  login(url): void {
+  login(url): Observable<Response> {
 
     this.oauth2endpoint = 'https://login.salesforce.com/services/oauth2/token'
 
@@ -59,6 +59,7 @@ export class SalesforceService {
 
     } else {
 
+      
       let result = {};
 
       let query = url.substr(16);
@@ -76,9 +77,9 @@ export class SalesforceService {
 
     }
 
-  let grantType = 'authorization_code'
+
   
-  let xhr = new XMLHttpRequest;
+  /*let xhr = new XMLHttpRequest;
 
   xhr.onreadystatechange = function() {
     if (this.status == 200) {
@@ -95,8 +96,26 @@ export class SalesforceService {
             +'&client_secret='+this.clientSecret
             +'&redirect_uri='+this.redirectUri
             +'&format=json')
-  xhr.send()
+  xhr.send()*/
 
+  
+  
+  let params = new URLSearchParams()
+  params.append('code', this.code)
+  params.append('grant_type', 'authorization_code')
+  params.append('client_id', this.clientId)
+  params.append('client_secret', this.clientSecret)
+  params.append('redirect_uri', this.redirectUri)
+  params.append('format', 'json')
+
+  
+  return this.http.post(this.oauth2endpoint, params)
+            .map((response: Response) =>  {
+
+              return response
+
+            })
+        
 }
 }
 

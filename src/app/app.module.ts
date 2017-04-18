@@ -15,6 +15,7 @@ import { AuthenticationService } from './authentication.service';
 import { UserService } from './user.service';
 import { GoogleService } from './google.service';
 import { SalesforceService } from './salesforce.service';
+import { SfService } from './sf.service';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { SalesforceService } from './salesforce.service';
     AuthenticationService,
     UserService,
     GoogleService,
-    SalesforceService
+    SalesforceService,
+    SfService
   ],
   bootstrap: [AppComponent]
 })

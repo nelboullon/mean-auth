@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 import { AuthenticationService } from '../authentication.service';
 import { GoogleService } from '../google.service';
 import { SalesforceService } from '../salesforce.service';
+import { SfService } from '../sf.service';
 
 
 @Component({
@@ -23,7 +24,8 @@ export class OauthComponent implements OnInit {
     private location: Location,
     private authenticationService: AuthenticationService,
     private googleService: GoogleService,
-    private salesforceService: SalesforceService) { }
+    private salesforceService: SalesforceService,
+    private sfService : SfService) { }
 
   ngOnInit() {
 
@@ -37,8 +39,13 @@ export class OauthComponent implements OnInit {
         
       }else if(this.authMethod === 'Salesforce') {
 
-        localStorage.removeItem('code')
-        this.salesforceService.login(url)
+        localStorage.removeItem('id')
+        this.sfService.login(url)
+          .subscribe( response => {
+
+            console.log(response)
+            
+          })
 
         
       }

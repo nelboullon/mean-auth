@@ -38,7 +38,7 @@ const port = process.env.PORT || 5000;
 app.set('port', port);
 
 //Set basic route
-app.get('/', (req,res) => {
+app.get('/',(req,res) => {
     res.send('MEAN OAuth API at http://localhost:' + port + '/api' );
 });
 
