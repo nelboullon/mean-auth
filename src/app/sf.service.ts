@@ -78,11 +78,12 @@ export class SfService {
 
     
 
+/*
+    let headers = new Headers()
+    headers.append('authorization', 'Bearer '+this.accessToken.toString())
+    let options = new RequestOptions({ headers: headers })*/
 
-    let headers = new Headers({ 'Authorization': 'Bearer '+this.accessToken });
-    let options = new RequestOptions({ headers: headers });
-
-    return this.http.get(this.oauth2endpoint, options)
+    return this.http.get(this.oauth2endpoint+'?bearer_token='+this.accessToken)
       .map((response : Response) => {
 
         return response
