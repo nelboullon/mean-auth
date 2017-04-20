@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { Http } from '@angular/http';
+import { Router } from '@angular/router'
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 
@@ -12,7 +13,8 @@ export class GoogleService {
   private accessToken;
 
   constructor(
-    private http: Http) { }
+    private http: Http,
+    private router: Router) { }
 
 
   signin(): void {
@@ -79,7 +81,7 @@ export class GoogleService {
           let email = JSON.parse(this.responseText).email
           localStorage.setItem('currentUser', JSON.stringify({ email: email, token: localStorage.getItem('access_token') }))
           localStorage.removeItem('access_token')        
-
+          
        } 
       }
     

@@ -29,23 +29,17 @@ export class OauthComponent implements OnInit {
 
   ngOnInit() {
 
-    if (this.authMethod) {
+    this.validateCurrentUser()
 
+    if (this.authMethod) {
+      
       let url = this.router.url;
       
       if (this.authMethod === 'Google') {
 
         this.googleService.login(url)
-          if (localStorage.getItem('currentUser')){
-
-            this.router.navigate(['/'])
-
-          }else{
-
-            this.router.navigate(['/login'])
-
-          } 
         
+
       }else if(this.authMethod === 'Salesforce') {
 
         localStorage.removeItem('id')
@@ -55,10 +49,24 @@ export class OauthComponent implements OnInit {
             console.log(response)
             
           })
-
-        
+       
       }
     }
+  }
+
+  validateCurrentUser() {
+
+    if (localStorage.getItem('currentUser')){
+
+        this.router.navigate(['/'])
+
+      }else{
+
+        this.router.navigate(['/login'])
+
+      } 
+        
+
   }
 
 }
