@@ -36,6 +36,15 @@ export class OauthComponent implements OnInit {
       if (this.authMethod === 'Google') {
 
         this.googleService.login(url)
+          if (localStorage.getItem('currentUser')){
+
+            this.router.navigate(['/'])
+
+          }else{
+
+            this.router.navigate(['/login'])
+
+          } 
         
       }else if(this.authMethod === 'Salesforce') {
 
