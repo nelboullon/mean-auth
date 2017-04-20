@@ -79,13 +79,11 @@ export class GoogleService {
         if (this.readyState == 4 && this.status == 200) {
 
           let email = JSON.parse(this.responseText).email
-          localStorage.setItem('currentUser', JSON.stringify({ email: email, token: localStorage.getItem('access_token') }))
+          localStorage.setItem('currentUser', JSON.stringify({ 'email': email, 'token': localStorage.getItem('access_token') }))
           localStorage.removeItem('access_token')        
           
        } 
       }
-    
-
 
     xhr.open('GET', this.oauth2Endpoint+'?access_token='+this.accessToken);
     xhr.send()

@@ -29,7 +29,7 @@ export class OauthComponent implements OnInit {
 
   ngOnInit() {
 
-    this.validateCurrentUser()
+    
 
     if (this.authMethod) {
       
@@ -38,7 +38,7 @@ export class OauthComponent implements OnInit {
       if (this.authMethod === 'Google') {
 
         this.googleService.login(url)
-        
+        this.validateCurrentUser()
 
       }else if(this.authMethod === 'Salesforce') {
 
